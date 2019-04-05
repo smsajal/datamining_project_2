@@ -1,10 +1,10 @@
-library(tree)
+#library(tree)
 library(randomForest)
-library(gbm)
+#library(gbm)
 library(adabag)
 library(pROC)
-library(ROCR)
-library(car)
+#library(ROCR)
+#library(car)
 library(dummies)
 
 rm(list=ls())
@@ -163,12 +163,14 @@ drawROCboost <- function(trainingData, testData)
   adaboost = boosting(class~., data = trainingData, mfinal = 500)
   s2 = Sys.time()
   trainTime = s2-s1
+  trainTime
   print(paste("Train time ", trainTime))
   
   s1 = Sys.time()
   pred.boost = predict.boosting(adaboost, newdata = testData, type = "prob")
   s2 = Sys.time()
   classifyTime = s2-s1
+  classifyTime
   print(paste("Classification time", classifyTime))
   
   print(paste('Accuracy',1-mean(as.character(pred.boost$class) != as.character(classification.test))))
@@ -273,3 +275,5 @@ drawROCboost <- function(trainingData, testData)
   
   print(paste("Average AUC ", mean(auc(roc1), auc(roc2), auc(roc3), auc(roc4), auc(roc5), auc(roc6))))
 }
+
+?boosting
